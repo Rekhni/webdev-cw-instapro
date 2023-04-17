@@ -2,8 +2,8 @@ import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage, user } from "../index.js";
 import { fetchLike } from '../api.js';
-import { formatDistanceToNow } from 'data-fns';
-import { ru } from 'data-fns/locale/';
+import { formatDistanceToNow } from 'date-fns';
+import { ru } from 'date-fns/locale/';
 
 export function renderPostsPageComponent({ appEl, isUser, token}) {
   // TODO: реализовать рендер постов из api
