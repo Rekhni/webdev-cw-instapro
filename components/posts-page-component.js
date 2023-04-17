@@ -89,17 +89,17 @@ export function renderPostsPageComponent({ appEl, isUser, token}) {
     button.addEventListener("click", () => {
       const postId = button.dataset.postId;
       const index = button.closest('.post').dataset.index;
-      let isLiked = ''
+      let isLiked = '';
       posts[index].isLiked ? isLiked = 1 : isLiked = 0;
       if (user) {
         fetchLike({ token, postId, isLiked })
         .then(() => {
           if (isLiked) {
-            post[index].isLiked = false;
-            post[index].likes.pop();
+            posts[index].isLiked = false;
+            posts[index].likes.pop();
           } else {
-            post[index].isLiked = true;
-            post[index].likes.push({
+            posts[index].isLiked = true;
+            posts[index].likes.push({
               id: user._id,
               name: user.name
             });
