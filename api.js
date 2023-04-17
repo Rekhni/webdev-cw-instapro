@@ -1,3 +1,5 @@
+import { posts } from "./components/posts-page-component";
+
 // Замени на свой, чтобы получить независимый от других набор данных.
 // "боевая" версия инстапро лежит в ключе prod
 const personalKey = "Reha";
@@ -5,7 +7,7 @@ const baseHost = "https://webdev-hw-api.vercel.app";
 const postsHost = `${baseHost}/api/v1/${personalKey}/instapro`;
 
 
-function responseHandler(response) {
+export function responseHandler(response) {
   switch (response.status) {
       case 200:
         return response.json();
@@ -114,3 +116,18 @@ export function fetchLike({ token, postId, isLiked }) {
     .then(response => responseHandler(response))
   }
 }
+
+export function deletePost( {token, id} ) {
+  return fetch("https://webdev-hw-api.vercel.app/api/v1/Reha/instapro/" + id, {
+      method: "DELETE",
+      headers: {
+        Authorization: token,
+      }
+    })
+      .then((response) => {
+        return response.json();
+      })
+}
+
+
+

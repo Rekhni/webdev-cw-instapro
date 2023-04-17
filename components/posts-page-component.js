@@ -1,9 +1,10 @@
 import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage, user } from "../index.js";
-import { fetchLike } from '../api.js';
+import { responseHandler,fetchLike } from '../api.js';
 import { formatDistanceToNow } from 'date-fns';
 import { ru } from 'date-fns/locale/';
+
 
 export function renderPostsPageComponent({ appEl, isUser, token}) {
   // TODO: реализовать рендер постов из api
@@ -57,10 +58,14 @@ export function renderPostsPageComponent({ appEl, isUser, token}) {
                     <span class="user-name">${post.user.name}</span>
                     ${post.description}
                   </p>
+                  </br>
+                  <button data-post-id=${post.id} class="delete-button">Delete</button>
+                  
 
                   <p class="post-date">
                     ${formatDistanceToNow(new Date(post.createdAt), {locale: ru, addSuffix: true})}
                   </p>
+                  </br>
                   
                   </li>
                   `
@@ -84,6 +89,14 @@ export function renderPostsPageComponent({ appEl, isUser, token}) {
       });
     });
   }
+
+
+
+
+//   function deleteComment(index, token) {
+
+    
+// };
 
   for (let button of document.querySelectorAll(".like-button")) {
     button.addEventListener("click", () => {
@@ -111,3 +124,4 @@ export function renderPostsPageComponent({ appEl, isUser, token}) {
     });
   }
 }
+
