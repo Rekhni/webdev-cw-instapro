@@ -2,6 +2,7 @@ import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
 import { posts, goToPage, user } from "../index.js";
 import { responseHandler,fetchLike } from '../api.js';
+import { correctUsersString } from "../helpers.js";
 import { formatDistanceToNow } from 'date-fns';
 import { ru } from 'date-fns/locale/';
 
@@ -16,7 +17,7 @@ export function renderPostsPageComponent({ appEl, isUser, token}) {
    * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
    */
   const appHtml = `
-              <div class="page-container">
+              <div class="page-container center">
                 <div class="header-container"></div>` 
                 +
                 `${isUser ? `<div class="posts-user-header"><img src="${posts[0].user.imageUrl}"
@@ -48,7 +49,7 @@ export function renderPostsPageComponent({ appEl, isUser, token}) {
 
                     <p class="post-likes-text">
                       Нравится: <strong>
-                      ${post.likes.length > 1 ? post.likes[0].name + `и еще ${post.likes.length - 1} пользователям`
+                      ${post.likes.length > 1 ? post.likes[0].name + `и еще ${correctUsersString(post.likes.length - 1)}`
                       : post.likes.length ? post.likes[0].name
                       : "0"}</strong>
                     </p>
@@ -102,9 +103,11 @@ export function renderPostsPageComponent({ appEl, isUser, token}) {
     button.addEventListener("click", () => {
       const postId = button.dataset.postId;
       const index = button.closest('.post').dataset.index;
+      const currentButton = button;
       let isLiked = '';
       posts[index].isLiked ? isLiked = 1 : isLiked = 0;
       if (user) {
+        currentButton.classList.add('like-animation');
         fetchLike({ token, postId, isLiked })
         .then(() => {
           if (isLiked) {

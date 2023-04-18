@@ -44,3 +44,15 @@ export function checkLogin(input, placeholder = ''){
     return true;
   }
 }
+
+
+export function safeInput(string) {
+  return str.replaceAll("&", "&amp;")
+ .replaceAll("<", "&lt;")
+ .replaceAll(">", "&gt;")
+ .replaceAll('"', "&quot;");
+}
+
+export function correctUsersString(num) {
+ return (num % 10 === 1) ? num +' пользователю' : num + ' пользователям';
+}

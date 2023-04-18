@@ -118,7 +118,7 @@ const renderApp = () => {
   
   if (page === POSTS_PAGE) {
     let isUser = false;
-    return renderPostsPageComponent({
+    renderPostsPageComponent({
       appEl,
       isUser,
       token: getToken()
@@ -128,11 +128,12 @@ const renderApp = () => {
   if (page === USER_POSTS_PAGE) {
     let isUser = true;
     // TODO: реализовать страницу фотографию пользвателя
-    return renderPostsPageComponent({
+    renderPostsPageComponent({
       appEl,
       isUser,
       token: getToken()
-    });
+    })
+    document.querySelector('.page-container').classList.add('posts-animation');
   }
 };
 
