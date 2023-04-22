@@ -75,7 +75,7 @@ export const goToPage = (newPage, data) => {
         .then((userPosts) => {
           page = USER_POSTS_PAGE;
           posts = userPosts;
-          userId = data.userId;
+          userId = data.user.id;
           renderApp();
         })
     }
