@@ -19,6 +19,7 @@ import {
 export let user = getUserFromLocalStorage();
 export let page = null;
 export let posts = [];
+let userId = '';
 
 const getToken = () => {
   const token = user ? `Bearer ${user.token}` : undefined;
@@ -68,16 +69,20 @@ export const goToPage = (newPage, data) => {
 
     if (newPage === USER_POSTS_PAGE) {
       // TODO: реализовать получение постов юзера из API
-      page = USER_POSTS_PAGE;
+      page = LOADING_PAGE;
       renderApp();
 
       return getUserPosts({ token: getToken(), id: data.userId })
         .then((userPosts) => {
           page = USER_POSTS_PAGE;
           posts = userPosts;
-          userId = data.user.id;
+          userId = data.userId;
           renderApp();
         })
+        .catch((error) => {
+          console.error(error);
+          goToPage(POSTS_PAGE);
+        });
     }
 
     page = newPage;
@@ -123,6 +128,8 @@ const renderApp = () => {
       isUser,
       token: getToken()
     });
+    document.querySelector('.page-container').classList.add('posts-animation');
+    return;
   }
 
   if (page === USER_POSTS_PAGE) {
@@ -134,6 +141,7 @@ const renderApp = () => {
       token: getToken()
     })
     document.querySelector('.page-container').classList.add('posts-animation');
+    return;
   }
 };
 
