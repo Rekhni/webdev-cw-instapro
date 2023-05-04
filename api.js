@@ -2,7 +2,7 @@ import { posts } from "./components/posts-page-component";
 
 // Замени на свой, чтобы получить независимый от других набор данных.
 // "боевая" версия инстапро лежит в ключе prod
-const personalKey = "Reha";
+const personalKey = "Rekni";
 const baseHost = "https://webdev-hw-api.vercel.app";
 const postsHost = `${baseHost}/api/v1/${personalKey}/instapro`;
 
@@ -117,16 +117,20 @@ export function fetchLike({ token, postId, isLiked }) {
   }
 }
 
-export function deletePost( {token, id} ) {
-  return fetch("https://webdev-hw-api.vercel.app/api/v1/Reha/instapro/" + id, {
-      method: "DELETE",
-      headers: {
-        Authorization: token,
-      }
+export function deletePost({ token, postId }) {
+  return fetch(postsHost + "/" + postId, {
+    method: "DELETE",
+    headers: {
+      Authorization: token,
+    },  
+  }).then((response) => {
+    if (response.status === 200) {
+      return response.json();
+    }
+    else if (response.status === 401) {
+        throw new Error("Нет авторизации");
+      } 
     })
-      .then((response) => {
-        return response.json();
-      })
 }
 
 

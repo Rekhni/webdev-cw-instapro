@@ -1,10 +1,12 @@
 import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
-import { posts, goToPage, user } from "../index.js";
-import { responseHandler,fetchLike } from '../api.js';
+import { posts, goToPage, user, getToken } from "../index.js";
+import { responseHandler,fetchLike, deletePost } from '../api.js';
 import { correctUsersString } from "../helpers.js";
 import { formatDistanceToNow } from 'date-fns';
 import { ru } from 'date-fns/locale/';
+import { POSTS_PAGE } from "../routes.js";
+
 
 
 export function renderPostsPageComponent({ appEl, isUser, token}) {
@@ -31,7 +33,7 @@ export function renderPostsPageComponent({ appEl, isUser, token}) {
                 posts.reduce((result, post, index) => {
                   return result + 
                   
-                  `<li class="post" data-index = "${index}">
+                  `<li class="post" data-id = "${post.id}" data-index = "${index}">
                   
                   ${isUser ? '' : `<div class="post-header" data-user-id=${post.user.id}>
                   <img src="${post.user.imageUrl}" class="post-header__user-image">
@@ -60,7 +62,7 @@ export function renderPostsPageComponent({ appEl, isUser, token}) {
                     ${post.description}
                   </p>
                   </br>
-                  <button data-post-id=${post.id} class="delete-button">Delete</button>
+                  <button data-id="${post.id}"class="delete-button">Delete</button>
                   
 
                   <p class="post-date">
@@ -93,11 +95,24 @@ export function renderPostsPageComponent({ appEl, isUser, token}) {
 
 
 
+  for (let deleteButton of document.querySelectorAll('.delete-button')) {
+    deleteButton.addEventListener("click", () => {
+      if (!user) {
+        alert('удалать посты могут только авторизованные пользователи')
+          return;
+        }
+      const postId = deleteButton.dataset.postId
+      console.log(postId)
+  
+      deletePost({
+        token : getToken(),
+        id : deleteButton.dataset.postId,
+      }).then(() => {
+        goToPage(POSTS_PAGE);
+    })
+    });
+  }
 
-//   function deleteComment(index, token) {
-
-    
-// };
 
   for (let button of document.querySelectorAll(".like-button")) {
     button.addEventListener("click", () => {
@@ -127,4 +142,27 @@ export function renderPostsPageComponent({ appEl, isUser, token}) {
     });
   }
 }
+
+// function deletePost(index, token) {
+//   return fetch('https://webdev-hw-api.vercel.app/api/v1/Reha/instapro/' + posts[index].id, {
+//       method: "DELETE",
+//       headers: {
+//           authorization: token,
+//       },
+//   })
+//       .then((response) => {        
+//           if(response.status === 200){
+//               posts.splice(index, 1);
+//               renderPostsPageComponent({ appEl, isUser, token })
+//               // return response.json();
+//           }
+//       })
+//       .catch(error => {
+//           console.warn(error);
+//           if (error.message = 'Failed to fetch'){
+//               alert('No internet link')
+//           }
+//       })
+  
+// };
 
