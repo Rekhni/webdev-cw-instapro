@@ -4,12 +4,12 @@ import { posts, goToPage, user } from "../index.js";
 import { responseHandler,fetchLike } from '../api.js';
 import { correctUsersString } from "../helpers.js";
 import { formatDistanceToNow } from 'date-fns';
-import { ru } from 'date-fns/locale/';
+import { en } from 'date-fns/locale/';
 
 
 export function renderPostsPageComponent({ appEl, isUser, token}) {
   // TODO: реализовать рендер постов из api
-  console.log("Актуальный список постов:", posts);
+  console.log("Current list of posts:", posts);
   console.log(isUser);
 
   /**
@@ -48,8 +48,8 @@ export function renderPostsPageComponent({ appEl, isUser, token}) {
                     </button>
 
                     <p class="post-likes-text">
-                      Нравится: <strong>
-                      ${post.likes.length > 1 ? post.likes[0].name + `и еще ${correctUsersString(post.likes.length - 1)}`
+                      Likes: <strong>
+                      ${post.likes.length > 1 ? post.likes[0].name + `and ${correctUsersString(post.likes.length - 1)}`
                       : post.likes.length ? post.likes[0].name
                       : "0"}</strong>
                     </p>
@@ -64,7 +64,7 @@ export function renderPostsPageComponent({ appEl, isUser, token}) {
                   
 
                   <p class="post-date">
-                    ${formatDistanceToNow(new Date(post.createdAt), {locale: ru, addSuffix: true})}
+                    ${formatDistanceToNow(new Date(post.createdAt), {locale: en, addSuffix: true})}
                   </p>
                   </br>
                   

@@ -13,16 +13,16 @@ export function renderAddPostPageComponent({ appEl, token }) {
     <div class="page-container">
       <div class="header-container"></div>
       <div class="form">
-          <h3 class="form-title">Добавить пост</h3>
+          <h3 class="form-title">Add post</h3>
           <div class="form-inputs">
             <div class="upload-image-container">
             </div>
 
-            <label> Опишите фотографию:
+            <label> Describe the post:
               <textarea class="input textarea" rows="4"></textarea>
             </label>
 
-            <button class="button" id="add-button">Добавить</button>
+            <button class="button" id="add-button">Add</button>
           </div>
       </div>
     </div>
@@ -48,7 +48,7 @@ export function renderAddPostPageComponent({ appEl, token }) {
       const imageInput = document.querySelector('.file-upload-input');
 
       if (!currentImageUrl) {
-        alert('Добавьте изображение');
+        alert('Add photo');
         return;
       }
 

@@ -8,13 +8,13 @@ export function renderHeaderComponent({ element }) {
       <button class="header-button add-or-login-button">
       ${
         user
-          ? `<div title="Добавить пост" class="add-post-sign"></div>`
-          : "Войти"
+          ? `<div title="Add post" class="add-post-sign"></div>`
+          : "Sign in"
       }
       </button>
       ${
         user
-          ? `<button title="${user.name}" class="header-button logout-button">Выйти</button>`
+          ? `<button title="${user.name}" class="header-button logout-button">Log out</button>`
           : ""
       }  
       </button>

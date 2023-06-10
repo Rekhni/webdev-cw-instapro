@@ -15,8 +15,8 @@ export function renderAuthPageComponent({ appEl, setUser }) {
               <h3 class="form-title">
                 ${
                   isLoginMode
-                    ? "Вход в&nbsp;Instapro"
-                    : "Регистрация в&nbsp;Instapro"
+                    ? "Sign in on&nbsp;Instapro"
+                    : "Sign up on&nbsp;Instapro"
                 }
                 </h3>
               <div class="form-inputs">
@@ -25,26 +25,26 @@ export function renderAuthPageComponent({ appEl, setUser }) {
                     !isLoginMode
                       ? `
                       <div class="upload-image-container"></div>
-                      <input type="text" id="name-input" class="input" placeholder="Имя" />
+                      <input type="text" id="name-input" class="input" placeholder="Name" />
                       `
                       : ""
                   }
                   
-                  <input type="text" id="login-input" class="input" placeholder="Логин" />
-                  <input type="password" id="password-input" class="input" placeholder="Пароль" />
+                  <input type="text" id="login-input" class="input" placeholder="Login" />
+                  <input type="password" id="password-input" class="input" placeholder="Password" />
                   
                   <div class="form-error"></div>
                   
                   <button class="button" id="login-button">${
-                    isLoginMode ? "Войти" : "Зарегистрироваться"
+                    isLoginMode ? "Sign in" : "Sign up"
                   }</button>
               </div>
             
               <div class="form-footer">
                 <p class="form-footer-title">
-                  ${isLoginMode ? "Нет аккаунта?" : "Уже есть аккаунт?"}
+                  ${isLoginMode ? "No account?" : "Already have account?"}
                   <button class="link-button" id="toggle-button">
-                    ${isLoginMode ? "Зарегистрироваться." : "Войти."}
+                    ${isLoginMode ? "Sign up." : "Sign in."}
                   </button>
                 </p> 
                
@@ -85,9 +85,9 @@ export function renderAuthPageComponent({ appEl, setUser }) {
         const passwordInput = document.getElementById("password-input");
         const password = document.getElementById("password-input").value;
 
-        if (!validate(loginInput, 'Логин')) return;
+        if (!validate(loginInput, 'Login')) return;
 
-        if (!validate(passwordInput, 'Пароль')) return;
+        if (!validate(passwordInput, 'Password')) return;
 
 
         loginUser({
@@ -110,16 +110,16 @@ export function renderAuthPageComponent({ appEl, setUser }) {
         const password = document.getElementById("password-input").value;
         const passwordInput = document.getElementById("password-input");
 
-        if (!validate(nameInput, 'Имя')) return;
-        if (!checkLogin(nameInput, 'Пароль')) return;
-        if (!validate(loginInput, 'Логин')) return;
-        if (!checkLogin(loginInput, 'Логин')) return;
-        if (!validate(passwordInput, 'Пароль')) return;
+        if (!validate(nameInput, 'Name')) return;
+        if (!checkLogin(nameInput, 'Password')) return;
+        if (!validate(loginInput, 'Login')) return;
+        if (!checkLogin(loginInput, 'Login')) return;
+        if (!validate(passwordInput, 'Password')) return;
 
 
 
         if (!imageUrl) {
-          alert("Не выбрана фотография");
+          alert("Image wasn't picked");
           return;
         }
 

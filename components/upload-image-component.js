@@ -11,7 +11,7 @@ export function renderUploadImageComponent({ element, onImageUrlChange }) {
           ? `
           <div class="file-upload-image-conrainer">
             <img class="file-upload-image" src="${imageUrl}">
-            <button class="file-upload-remove-button button">Заменить фото</button>
+            <button class="file-upload-remove-button button">Change the image</button>
           </div>
           `
           : `
@@ -21,7 +21,7 @@ export function renderUploadImageComponent({ element, onImageUrlChange }) {
                   class="file-upload-input"
                   style="display:none"
                 />
-                Выберите фото
+                Choose an image
             </label>
           
       `
@@ -36,7 +36,7 @@ export function renderUploadImageComponent({ element, onImageUrlChange }) {
       if (file) {
         const lableEl = document.querySelector(".file-upload-label");
         lableEl.setAttribute("disabled", true);
-        lableEl.textContent = "Загружаю файл...";
+        lableEl.textContent = "Downloading file...";
         uploadImage({ file }).then(({ fileUrl }) => {
           imageUrl = fileUrl;
           onImageUrlChange(imageUrl);

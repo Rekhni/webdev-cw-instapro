@@ -18,7 +18,7 @@ export function removeUserFromLocalStorage(user) {
 export function validate(input, placeholder = '') {
   if (input.value === '' || input.value === '\n') {
       input.classList.add('error');
-      input.placeholder = 'Поле не может быть пустым!';
+      input.placeholder = "Space can't be empty!";
       input.value = '';
       setTimeout(() => {
           input.classList.remove('error')
@@ -34,7 +34,7 @@ export function checkLogin(input, placeholder = ''){
   const pattern = /^[a-zа-я][a-zа-я0-9-_]*$/i;
   if(!pattern.test(input.value)){
     input.classList.add('error');
-    input.placeholder = 'Поле не может содержать специальные символы, кроме "-" и "_"';
+    input.placeholder = 'Space cannot consist special symbols except "-" and "_"';
     input.value = '';
     setTimeout(() => {
         input.classList.remove('error')
@@ -54,5 +54,5 @@ export function safeInput(string) {
 }
 
 export function correctUsersString(num) {
- return (num % 10 === 1) ? num +' пользователю' : num + ' пользователям';
+ return (num % 10 === 1) ? num +' user' : num + ' users';
 }

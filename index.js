@@ -86,7 +86,7 @@ export const goToPage = (newPage, data) => {
     return;
   }
 
-  throw new Error("страницы не существует");
+  throw new Error("No such profile");
 };
 
 const renderApp = () => {
